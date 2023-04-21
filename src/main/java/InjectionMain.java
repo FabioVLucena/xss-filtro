@@ -3,7 +3,7 @@ package main.java;
 public class InjectionMain {
 	
 	public static void main(String[] args) {
-		String inputStr = "<script>alert('HA HA HA')</script>";
+		String inputStr = "<script>docudocument.ment.('HA HA HA')</script>";
 		
 		String inputStrNew = filtrarInput(inputStr);
 		
@@ -16,7 +16,11 @@ public class InjectionMain {
 		String[] removeStrArr = new String[] { "</", ">", "<", "'", "document.", "(", ")" };
 		
 		for (String removeStr : removeStrArr) {
-			inputStrNew = inputStrNew.replace(removeStr, "");
+			Boolean contem = true;
+			do {
+				inputStrNew = inputStrNew.replace(removeStr, "");
+				contem = inputStrNew.contains(removeStr);
+			} while (contem);
 		}
 		
 		return inputStrNew;
